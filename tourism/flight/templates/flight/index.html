@@ -1,0 +1,383 @@
+{% extends 'flight/layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>Home | Tourism</title>
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    
+    <!-- Custom CSS for new UI elements -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/tourly-elements.css' %}">
+    
+    <!-- Ionicons for icons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+{% endblock head %}
+
+{% block body %}
+    <!-- Top header with contact info and social media -->
+  
+
+    <!-- Main Navigation -->
+    
+    <!-- Hero section with background image -->
+    <section class="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('{% static 'img/plane3.12.jpg'%}');">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">JOURNEY TO<br>EXPLORE WORLD</h1>
+                <p class="hero-text">
+                    Discover breathtaking destinations with Flight,
+                    where every journey is an unforgettable adventure.
+                    Explore, experience, and make memories your way!
+                </p>
+                <div class="hero-btn-group">
+                    <button class="btn btn-outline">LEARN MORE</button>
+                    <button class="btn btn-primary" onclick="window.location.href='#search-section'">BOOK NOW</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flight search section - maintained from original -->
+    <section class="section search-section" id="search-section">
+        <div class="container">
+            <div class="search-flight">
+                <h2 class="section-title">Book Domestic and International Flight Tickets</h2>
+                <br>
+                <form class="search-flight-form" action="{% url 'flight' %}" onsubmit="return flight_search()">
+                    <div class="align-items-center">
+                        <div class="search-flight-form-data">
+                            <div class="input-row" style="display: flex;">
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="TripType" value="1" {% if trip_type != '2' %}checked{% endif %} onclick="display_return_date(this)">One Way
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="TripType" value="2" {% if trip_type == '2' %}checked{% endif %} onclick="display_return_date(this)">Round Trip
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="input-row">
+                                <label for="flight_from">From: </label>
+                                <div class="input-with-icon">
+                                    <ion-icon name="airplane-outline"></ion-icon>
+                                    <input type="text" name="Origin" placeholder="From" id="flight-from" class="form-control mr-sm-3" onfocus="flight_from(event, true)" onkeyup="flight_from(event)" onblur="hideplaces(this)" data-value="{{origin | lower}}" data-list="places_from" autocomplete="off" value="{{origin | upper}}">
+                                </div>
+                                <div id="places_from" class="places_box">
+                                    <div class="each_places_from_list places__list" data-value="del" onclick="selectplace(this)">Delhi (India)</div>
+                                    <div class="each_places_from_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
+                                    <div class="each_places_from_list places__list" data-value="bkk" onclick="selectplace(this)">Bangkok (Thailand)</div>
+                                    <div class="each_places_from_list places__list" data-value="nrt" onclick="selectplace(this)">Tokyo (Japan)</div>
+                                    <div class="each_places_from_list places__list" data-value="sin" onclick="selectplace(this)">Singapore (Singapore)</div>
+                                    <div class="each_places_from_list places__list" data-value="tpe" onclick="selectplace(this)">Taipei (Taiwan)</div>
+                                    <div class="each_places_from_list places__list" data-value="nyc" onclick="selectplace(this)">New York (USA)</div>
+                                </div>
+                            </div>
+
+                            <div class="input-row">
+                                <label for="flight_to">To: </label>
+                                <div class="input-with-icon">
+                                    <ion-icon name="location-outline"></ion-icon>
+                                    <input type="text" name="Destination" placeholder="To" id="flight-to" class="form-control mr-sm-3" onfocus="flight_to(event, true)" onkeyup="flight_to(event)" onblur="hideplaces(this)" data-value="{{destination | lower}}" data-list="places_to" autocomplete="off" value="{{destination | upper}}">
+                                </div>
+                                <div id="places_to" class="places_box">
+                                    <div class="each_places_to_list places__list" data-value="del" onclick="selectplace(this)">Delhi (India)</div>
+                                    <div class="each_places_to_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
+                                    <div class="each_places_to_list places__list" data-value="bkk" onclick="selectplace(this)">Bangkok (Thailand)</div>
+                                    <div class="each_places_to_list places__list" data-value="nrt" onclick="selectplace(this)">Tokyo (Japan)</div>
+                                    <div class="each_places_to_list places__list" data-value="sin" onclick="selectplace(this)">Singapore (Singapore)</div>
+                                    <div class="each_places_to_list places__list" data-value="tpe" onclick="selectplace(this)">Taipei (Taiwan)</div>
+                                    <div class="each_places_to_list places__list" data-value="nyc" onclick="selectplace(this)">New York (USA)</div>
+                                </div>
+                            </div>
+
+                            <div class="input-row">
+                                <label for="depart_date">Departure Date: </label>
+                                <div class="input-with-icon">
+                                    <ion-icon name="calendar-outline"></ion-icon>
+                                    <input type="date" name="DepartDate" min="{{min_date}}" max="{{max_date}}" id="depart_date" placeholder="Date" class="form-control mr-sm-2" value="{{depart_date}}">
+                                </div>
+                            </div>
+
+                            <div class="input-row">
+                                <label for="return_date">Return Date: </label>
+                                <div class="input-with-icon">
+                                    <ion-icon name="calendar-outline"></ion-icon>
+                                    <input type="date" name="ReturnDate" min="{{min_date}}" max="{{max_date}}" id="return_date" placeholder="Date" class="form-control mr-sm-2" value="{{return_date}}" {% if trip_type != '2' %} disabled {% endif %}>
+                                </div>
+                            </div>
+
+                            <div class="input-row">
+                                <label for="seat_class">Class: </label>
+                                <div class="input-with-icon">
+                                    <ion-icon name="business-outline"></ion-icon>
+                                    <select name="SeatClass" id="SeatType" class="form-control mr-sm-2 selectpicker">
+                                        <option value="economy" {% if seat == 'economy' %}selected{% endif %}>Economy</option>
+                                        <option value="business" {% if seat == 'business' %}selected{% endif %}>Business</option>
+                                        <option value="first" {% if seat == 'first' %}selected{% endif %}>First</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input-row">
+                                <button type="submit" class="btn btn-primary search-btn">
+                                    <ion-icon name="search-outline"></ion-icon>
+                                    Search Flight
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Latest Flights Section -->
+    <section class="section latest-flights">
+        <div class="container">
+            <p class="section-subtitle">Latest Flights</p>
+            <h2 class="h2 section-title">Popular Flight Deals</h2>
+            <p class="section-text">
+                Find the best deals on flights to your favorite destinations. 
+                Book now to secure the best prices!
+            </p>
+
+            <div class="flight-deals">
+                <div class="flight-card">
+                    <div class="flight-header">
+                        <div class="flight-route">
+                            <h3>Delhi → Mumbai</h3>
+                            <p>5 Jul 2023 | Economy</p>
+                        </div>
+                        <div class="flight-price">
+                            <h3>₹4,299</h3>
+                            <p>per person</p>
+                        </div>
+                    </div>
+                    <div class="flight-details">
+                        <div class="airline">
+                            <ion-icon name="airplane-outline"></ion-icon>
+                            <p>IndiGo</p>
+                        </div>
+                        <div class="time">
+                            <p>DEL 07:15 → BOM 09:35</p>
+                            <p class="duration">2h 20m | Non-stop</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="window.location.href='/flight?Origin=del&Destination=bom&DepartDate=2023-07-05&TripType=1&SeatClass=economy'">Book Now</button>
+                </div>
+
+                <div class="flight-card">
+                    <div class="flight-header">
+                        <div class="flight-route">
+                            <h3>Mumbai → Singapore</h3>
+                            <p>10 Jul 2023 | Economy</p>
+                        </div>
+                        <div class="flight-price">
+                            <h3>₹12,500</h3>
+                            <p>per person</p>
+                        </div>
+                    </div>
+                    <div class="flight-details">
+                        <div class="airline">
+                            <ion-icon name="airplane-outline"></ion-icon>
+                            <p>Singapore Airlines</p>
+                        </div>
+                        <div class="time">
+                            <p>BOM 23:45 → SIN 07:55</p>
+                            <p class="duration">5h 40m | Non-stop</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="window.location.href='/flight?Origin=bom&Destination=sin&DepartDate=2023-07-10&TripType=1&SeatClass=economy'">Book Now</button>
+                </div>
+
+                <div class="flight-card">
+                    <div class="flight-header">
+                        <div class="flight-route">
+                            <h3>Delhi → New York</h3>
+                            <p>15 Jul 2023 | Business</p>
+                        </div>
+                        <div class="flight-price">
+                            <h3>₹75,000</h3>
+                            <p>per person</p>
+                        </div>
+                    </div>
+                    <div class="flight-details">
+                        <div class="airline">
+                            <ion-icon name="airplane-outline"></ion-icon>
+                            <p>Air India</p>
+                        </div>
+                        <div class="time">
+                            <p>DEL 02:30 → NYC 08:15</p>
+                            <p class="duration">16h 15m | 1 Stop</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="window.location.href='/flight?Origin=del&Destination=nyc&DepartDate=2023-07-15&TripType=1&SeatClass=business'">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations Section - adapted from both templates -->
+    <section class="section popular-destination" id="destination">
+        <div class="container">
+            <p class="section-subtitle">Popular Destinations</p>
+            <h2 class="h2 section-title">Explore Top Destinations</h2>
+            <p class="section-text">
+                Discover the most breathtaking destinations around the world.
+                Start your journey with Flight today!
+            </p>
+
+            <div class="popular_destinations">
+                <div class="destination-item">
+                    <div class="single_destination" onclick="window.location.href='/flight?Origin=del&Destination=bom&DepartDate=2023-07-05&TripType=1&SeatClass=economy'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/1.png' %}" alt="Italy">
+                        </div>
+                        <div class="content">
+                            <a href="#">Italy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-item">
+                    <div class="single_destination" onclick="window.location.href='/flight?Origin=bom&Destination=sin&DepartDate=2023-07-10&TripType=1&SeatClass=economy'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/2.png' %}" alt="Brazil">
+                        </div>
+                        <div class="content">
+                            <a href="#">Brazil</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-item">
+                    <div class="single_destination" onclick="window.location.href='/flight?Origin=del&Destination=nyc&DepartDate=2023-07-15&TripType=1&SeatClass=business'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/3.png' %}" alt="America">
+                        </div>
+                        <div class="content">
+                            <a href="#">America</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-item">
+                    <div class="single_destination" onclick="window.location.href='/flight?Origin=tpe&Destination=bkk&DepartDate=2023-07-20&TripType=1&SeatClass=economy'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/4.png' %}" alt="Nepal">
+                        </div>
+                        <div class="content">
+                            <a href="#">Nepal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-item">
+                    <div class="single_destination" onclick="window.location.href='/flight?Origin=sin&Destination=nrt&DepartDate=2023-07-25&TripType=1&SeatClass=economy'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/5.png' %}" alt="Maldives">
+                        </div>
+                        <div class="content">
+                            <a href="#">Maldives</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-item">
+                    <div class="single_destination" onclick="window.location.href='/flight?Origin=nrt&Destination=del&DepartDate=2023-07-30&TripType=1&SeatClass=economy'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/6.png' %}" alt="Indonesia">
+                        </div>
+                        <div class="content">
+                            <a href="#">Indonesia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to action section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <p class="section-subtitle">Ready To Fly?</p>
+                <h2 class="h2 section-title">Start Your Journey Today</h2>
+                <p class="section-text">
+                    Wherever you want to go, we'll get you there. Book your flight now and embark on your next adventure!
+                </p>
+                <button class="btn btn-primary" onclick="window.location.href='#search-section'">Book Your Flight</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <ion-icon name="airplane"></ion-icon>
+                        <span>FLIGHT</span>
+                    </div>
+                    <p class="footer-description">
+                        Discover the world with us. We provide the best flight deals and travel experiences.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="#" class="social-icon"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="#" class="social-icon"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="#" class="social-icon"><ion-icon name="logo-youtube"></ion-icon></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="#destination">Destinations</a></li>
+                        <li><a href="/packages">Packages</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="/faq">FAQs</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/terms">Terms & Conditions</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/refund">Refund Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <ion-icon name="location-outline"></ion-icon>
+                            <span>123 Travel Street, City, Country</span>
+                        </li>
+                        <li>
+                            <ion-icon name="call-outline"></ion-icon>
+                            <span>+91 94672 86056</span>
+                        </li>
+                        <li>
+                            <ion-icon name="mail-outline"></ion-icon>
+                            <span>info@flight.com</span>
+                        </li>
+                        <li>
+                            <ion-icon name="time-outline"></ion-icon>
+                            <span>Mon-Sat: 9AM - 6PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Flight. All Rights Reserved.</p>
+                <p>Designed with <ion-icon name="heart"></ion-icon> by Flight Team</p>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

@@ -1,0 +1,297 @@
+/* Dark Blue Theme for Navbar */
+.navbar-dark-blue {
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: black;
+    position: relative;
+    z-index: 1000;
+}
+
+.navbar-dark-blue .navbar-brand img {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: black;
+}
+
+.navbar-dark-blue .navbar-brand:hover img {
+    transform: scale(1.15) rotate(2deg);
+}
+
+.navbar-dark-blue .navbar-toggler {
+    border-color: rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar-dark-blue .navbar-toggler:hover {
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.navbar-dark-blue .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    transition: transform 0.3s ease;
+}
+
+.navbar-dark-blue .nav-link {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+}
+
+.navbar-dark-blue .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #4D7BF3;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.navbar-dark-blue .nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(77, 123, 243, 0.08);
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
+}
+
+.navbar-dark-blue .nav-link:hover {
+    color: #4D7BF3 !important;
+    transform: translateY(-2px);
+}
+
+.navbar-dark-blue .nav-link:hover::before {
+    transform: translateY(0);
+}
+
+.navbar-dark-blue .nav-link:hover::after {
+    width: 80%;
+    opacity: 1;
+}
+
+.navbar-dark-blue .nav-item.active .nav-link {
+    color: #4D7BF3 !important;
+}
+
+.navbar-dark-blue .nav-item.active .nav-link::after {
+    width: 80%;
+    opacity: 1;
+}
+
+/* Animated Buttons */
+.navbar-dark-blue .btn-animated {
+    background: linear-gradient(135deg, #f3f3f3, #ffffff);
+    border: none;
+    border-radius: 30px;
+    color: rgb(0, 0, 0);
+    padding: 0.5rem 1.2rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-dark-blue .btn-animated:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(77, 123, 243, 0.2), transparent);
+    transition: left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
+}
+
+.navbar-dark-blue .btn-animated:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(77, 123, 243, 0.2);
+    color: #4D7BF3;
+}
+
+.navbar-dark-blue .btn-animated:hover::before {
+    left: 100%;
+}
+
+.navbar-dark-blue .btn-outline-animated {
+    background: transparent;
+    border: 2px solid #4D7BF3;
+    border-radius: 30px;
+    color: #4D7BF3;
+    padding: 0.4rem 1.1rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar-dark-blue .btn-outline-animated::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #4D7BF3;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
+}
+
+.navbar-dark-blue .btn-outline-animated:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(77, 123, 243, 0.3);
+}
+
+.navbar-dark-blue .btn-outline-animated:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.navbar-dark-blue .dropdown-menu {
+    background: white;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 10px;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.navbar-dark-blue .dropdown.show .dropdown-menu {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-dark-blue .dropdown-item {
+    color: rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin: 0.2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar-dark-blue .dropdown-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(77, 123, 243, 0.08);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.navbar-dark-blue .dropdown-item:hover {
+    background: transparent;
+    color: #4D7BF3;
+    transform: translateX(5px);
+}
+
+.navbar-dark-blue .dropdown-item:hover::before {
+    transform: translateX(0);
+}
+
+/* Profile Button */
+.navbar-dark-blue .profile-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(77, 123, 243, 0.1);
+    border-radius: 30px;
+    padding: 0.3rem 0.8rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+}
+
+.navbar-dark-blue .profile-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(77, 123, 243, 0.2), rgba(77, 123, 243, 0.1));
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
+}
+
+.navbar-dark-blue .profile-button svg {
+    margin-right: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.navbar-dark-blue .profile-button:hover {
+    background: rgba(77, 123, 243, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(77, 123, 243, 0.2);
+}
+
+.navbar-dark-blue .profile-button:hover::before {
+    transform: translateX(0);
+}
+
+.navbar-dark-blue .profile-button:hover svg {
+    transform: rotate(10deg);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .navbar-dark-blue {
+        padding: 0.8rem;
+    }
+
+    .navbar-dark-blue .navbar-collapse {
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 0.5rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transform: translateY(-10px);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .navbar-dark-blue .navbar-collapse.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .navbar-dark-blue .nav-link {
+        padding: 0.7rem;
+        border-radius: 5px;
+    }
+    
+    .navbar-dark-blue .nav-link:hover {
+        background-color: rgba(77, 123, 243, 0.08);
+    }
+
+    .navbar-dark-blue .nav-link::after {
+        display: none;
+    }
+}
